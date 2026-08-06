@@ -1,0 +1,25 @@
+{
+  "name": "telegrambot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "dotenv": "^16.6.1",
+    "input": "^1.0.1",
+    "npm": "^11.0.0",
+    "openai": "^4.80.1",
+    "teleproto": "^1.228.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^22.20.1",
+    "prisma": "^7.9.1"
+  }
+}
