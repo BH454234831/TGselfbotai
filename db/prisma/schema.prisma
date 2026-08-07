@@ -13,42 +13,43 @@ datasource db {
 }
 
 model TelegramUser {
-id BigInt @id
-displayname String
-
-facts Facts[]
-relation Relation[]
-messageHistory MessageHistory[]
+  id                BigInt           @id
+  displayname       String
+  relationShipStart DateTime
+  facts             Facts[]
+  relation          Relation[]
+  messageHistory    MessageHistory[]
 }
 
 model Facts {
-  id Int @id @default(autoincrement())
-  user TelegramUser @relation(fields: [telegramUserid], references: [id])
+  id             Int          @id @default(autoincrement())
+  class          String
+  content        String
+  user           TelegramUser @relation(fields: [telegramUserid], references: [id])
   telegramUserid BigInt
-  important Float
+  important      Float
 }
 
 model Relation {
-  id Int @id @default(autoincrement())
-  user TelegramUser @relation(fields: [telegramUserid], references: [id])
-  telegramUserid BigInt
-  trust Float
-  warm Float
-  respect Float
-  affection Float
-  conflict Float
+  id                   Int          @id @default(autoincrement())
+  user                 TelegramUser @relation(fields: [telegramUserid], references: [id])
+  telegramUserid       BigInt @unique
+  trust                Float
+  warm                 Float
+  respect              Float
+  affection            Float
+  conflict             Float
   interactionFrequenct Int
-  relationshipDuration Int
 }
 
 model MessageHistory {
-  id Int @id @default(autoincrement())
-  messageid Int
-  user TelegramUser @relation(fields: [telegramUserid], references: [id])
+  id             Int          @id @default(autoincrement())
+  messageid      Int
+  user           TelegramUser @relation(fields: [telegramUserid], references: [id])
   telegramUserid BigInt
-  isMyMessage Boolean
-  content String
-  media Boolean @default(false)
+  isMyMessage    Boolean
+  content        String
+  media          Boolean      @default(false)
 
   @@unique([telegramUserid, messageid])
 }

@@ -40,18 +40,24 @@ export type FactsSumAggregateOutputType = {
 
 export type FactsMinAggregateOutputType = {
   id: number | null
+  class: string | null
+  content: string | null
   telegramUserid: bigint | null
   important: number | null
 }
 
 export type FactsMaxAggregateOutputType = {
   id: number | null
+  class: string | null
+  content: string | null
   telegramUserid: bigint | null
   important: number | null
 }
 
 export type FactsCountAggregateOutputType = {
   id: number
+  class: number
+  content: number
   telegramUserid: number
   important: number
   _all: number
@@ -72,18 +78,24 @@ export type FactsSumAggregateInputType = {
 
 export type FactsMinAggregateInputType = {
   id?: true
+  class?: true
+  content?: true
   telegramUserid?: true
   important?: true
 }
 
 export type FactsMaxAggregateInputType = {
   id?: true
+  class?: true
+  content?: true
   telegramUserid?: true
   important?: true
 }
 
 export type FactsCountAggregateInputType = {
   id?: true
+  class?: true
+  content?: true
   telegramUserid?: true
   important?: true
   _all?: true
@@ -177,6 +189,8 @@ export type FactsGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type FactsGroupByOutputType = {
   id: number
+  class: string
+  content: string
   telegramUserid: bigint
   important: number
   _count: FactsCountAggregateOutputType | null
@@ -206,6 +220,8 @@ export type FactsWhereInput = {
   OR?: Prisma.FactsWhereInput[]
   NOT?: Prisma.FactsWhereInput | Prisma.FactsWhereInput[]
   id?: Prisma.IntFilter<"Facts"> | number
+  class?: Prisma.StringFilter<"Facts"> | string
+  content?: Prisma.StringFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntFilter<"Facts"> | bigint | number
   important?: Prisma.FloatFilter<"Facts"> | number
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
@@ -213,6 +229,8 @@ export type FactsWhereInput = {
 
 export type FactsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
   user?: Prisma.TelegramUserOrderByWithRelationInput
@@ -223,6 +241,8 @@ export type FactsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FactsWhereInput | Prisma.FactsWhereInput[]
   OR?: Prisma.FactsWhereInput[]
   NOT?: Prisma.FactsWhereInput | Prisma.FactsWhereInput[]
+  class?: Prisma.StringFilter<"Facts"> | string
+  content?: Prisma.StringFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntFilter<"Facts"> | bigint | number
   important?: Prisma.FloatFilter<"Facts"> | number
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
@@ -230,6 +250,8 @@ export type FactsWhereUniqueInput = Prisma.AtLeast<{
 
 export type FactsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
   _count?: Prisma.FactsCountOrderByAggregateInput
@@ -244,44 +266,60 @@ export type FactsScalarWhereWithAggregatesInput = {
   OR?: Prisma.FactsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FactsScalarWhereWithAggregatesInput | Prisma.FactsScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Facts"> | number
+  class?: Prisma.StringWithAggregatesFilter<"Facts"> | string
+  content?: Prisma.StringWithAggregatesFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntWithAggregatesFilter<"Facts"> | bigint | number
   important?: Prisma.FloatWithAggregatesFilter<"Facts"> | number
 }
 
 export type FactsCreateInput = {
+  class: string
+  content: string
   important: number
   user: Prisma.TelegramUserCreateNestedOneWithoutFactsInput
 }
 
 export type FactsUncheckedCreateInput = {
   id?: number
+  class: string
+  content: string
   telegramUserid: bigint | number
   important: number
 }
 
 export type FactsUpdateInput = {
+  class?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
   user?: Prisma.TelegramUserUpdateOneRequiredWithoutFactsNestedInput
 }
 
 export type FactsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  class?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
   telegramUserid?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   important?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type FactsCreateManyInput = {
   id?: number
+  class: string
+  content: string
   telegramUserid: bigint | number
   important: number
 }
 
 export type FactsUpdateManyMutationInput = {
+  class?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type FactsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  class?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
   telegramUserid?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   important?: Prisma.FloatFieldUpdateOperationsInput | number
 }
@@ -298,6 +336,8 @@ export type FactsOrderByRelationAggregateInput = {
 
 export type FactsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
 }
@@ -310,12 +350,16 @@ export type FactsAvgOrderByAggregateInput = {
 
 export type FactsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
 }
 
 export type FactsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  class?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
 }
@@ -385,11 +429,15 @@ export type IntFieldUpdateOperationsInput = {
 }
 
 export type FactsCreateWithoutUserInput = {
+  class: string
+  content: string
   important: number
 }
 
 export type FactsUncheckedCreateWithoutUserInput = {
   id?: number
+  class: string
+  content: string
   important: number
 }
 
@@ -423,26 +471,36 @@ export type FactsScalarWhereInput = {
   OR?: Prisma.FactsScalarWhereInput[]
   NOT?: Prisma.FactsScalarWhereInput | Prisma.FactsScalarWhereInput[]
   id?: Prisma.IntFilter<"Facts"> | number
+  class?: Prisma.StringFilter<"Facts"> | string
+  content?: Prisma.StringFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntFilter<"Facts"> | bigint | number
   important?: Prisma.FloatFilter<"Facts"> | number
 }
 
 export type FactsCreateManyUserInput = {
   id?: number
+  class: string
+  content: string
   important: number
 }
 
 export type FactsUpdateWithoutUserInput = {
+  class?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type FactsUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  class?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type FactsUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  class?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -450,6 +508,8 @@ export type FactsUncheckedUpdateManyWithoutUserInput = {
 
 export type FactsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  class?: boolean
+  content?: boolean
   telegramUserid?: boolean
   important?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
@@ -457,6 +517,8 @@ export type FactsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type FactsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  class?: boolean
+  content?: boolean
   telegramUserid?: boolean
   important?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
@@ -464,6 +526,8 @@ export type FactsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type FactsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  class?: boolean
+  content?: boolean
   telegramUserid?: boolean
   important?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
@@ -471,11 +535,13 @@ export type FactsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type FactsSelectScalar = {
   id?: boolean
+  class?: boolean
+  content?: boolean
   telegramUserid?: boolean
   important?: boolean
 }
 
-export type FactsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "telegramUserid" | "important", ExtArgs["result"]["facts"]>
+export type FactsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "class" | "content" | "telegramUserid" | "important", ExtArgs["result"]["facts"]>
 export type FactsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }
@@ -493,6 +559,8 @@ export type $FactsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    class: string
+    content: string
     telegramUserid: bigint
     important: number
   }, ExtArgs["result"]["facts"]>
@@ -920,6 +988,8 @@ export interface Prisma__FactsClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface FactsFieldRefs {
   readonly id: Prisma.FieldRef<"Facts", 'Int'>
+  readonly class: Prisma.FieldRef<"Facts", 'String'>
+  readonly content: Prisma.FieldRef<"Facts", 'String'>
   readonly telegramUserid: Prisma.FieldRef<"Facts", 'BigInt'>
   readonly important: Prisma.FieldRef<"Facts", 'Float'>
 }

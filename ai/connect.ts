@@ -1,34 +1,68 @@
 import OpenAI from "openai";
-import { model, temperature } from "./modelSettingsConst";
+import { masterPrompt, model, temperature, tools } from "./modelSettingsConst";
 import { prisma } from "../db/prisma/service";
+import { chunks } from "teleproto/Utils";
+import { handleFactTool, handleRelationTool } from "./tools/toolsHandler";
 
 export class AIBot {
     private static clientAi: OpenAI;
-    
 
     constructor() {
         AIBot.clientAi = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,
-        baseURL: process.env.OPENAI_URL
-    });
+            apiKey: process.env.OPENAI_API_KEY,
+            baseURL: process.env.OPENAI_URL
+        });
     }
-    
+
     static async generateResponse(userid: number) {
-        const dialogHistory = await prisma.messageHistory.findMany({where: {telegramUserid: userid}, take: 15, select: {content: true, isMyMessage: true, user: true, messageid: true}, orderBy: {messageid: 'desc'}})
-        const history: {role: "assistant" | "user", content: string}[] = []
+        const dialogHistory = await prisma.messageHistory.findMany({ where: { telegramUserid: userid }, take: 20, select: { content: true, isMyMessage: true, user: true, messageid: true }, orderBy: { messageid: 'desc' } })
+
+        const facts = await prisma.facts.findMany({ select: { class: true, content: true, important: true } })
+        const relation = await prisma.relation.findFirst({
+            select: {
+                trust: true, warm: true, respect: true, affection: true, conflict: true
+            }
+        })
+
+
+        const factsPrompt = "Далее представлены факты о собеседнике в формате {content: Описание факта о человеке, class: Классификация факта, important: Важность от 0 до 1 в формате float}"
+            + JSON.stringify(facts)
+        const relationPrompt = "Далее представлены твои отношения с собеседником в формате {trust: float; warm: float;respect: float;affection: float;conflict: float;} Значение 1 - максимальное, например максимальное доверие, теплота, симпатия или максимальная конфликтная ситуация. Значение 0 - минимальное"
+            + JSON.stringify(relation)
+
+        const history: { role: "assistant" | "user", content: string }[] = []
         dialogHistory.forEach(m => {
-            history.push({role: m.isMyMessage ? "assistant" : "user", content: m.content});
+            if (history.length > 0) {
+                if ((history[history.length - 1].role == "assistant" && m.isMyMessage) || (history[history.length - 1].role == "user" && !m.isMyMessage)) {
+                    history[history.length - 1].content = history[history.length - 1].content + " " + m.content
+                }
+            }
+            history.push({ role: m.isMyMessage ? "assistant" : "user", content: m.content });
         })
         let completion = await this.clientAi.chat.completions.create({
             messages: [
-                {role: 'system', content: "Ты обычный человек, мужчина, который общается внутри платформы Telegram исключительно на русском языке. Твой характер: нарцисс, молодой красивый, любишь выпивать 2-3 раза в неделю. Твоя задача поддержать диалог, отвечай максимально кратко максимум 1-2 предложениями, но чаще просто пару слов, поддерживать диалог на простые темы. НЕ ГОВОРИ ЧТО ТЫ ПРОГРАММА ИЛИ НЕЙРОСЕТЬ, вместо этого отшучивайся или отрицай. Не используй эмодзи используй обьычное тире вместо длинного, старайся избегать тире. Не повторяй сообщения"},
-                ...(history.reverse()),
+                {
+                    role: 'system', content: masterPrompt + " " + relationPrompt + " " + factsPrompt
+                },
+                ...(history.reverse()), // reverse нужен чтобы выстроить правильный ход диалога
             ],
+            tools: tools,
+            tool_choice: 'auto',
             model: model,
             temperature: temperature,
             max_tokens: 1024,
         });
+        if (completion.choices[0]?.message?.tool_calls) {
+            console.log("tools resolved", completion.choices[0]?.message?.tool_calls)
+            completion.choices[0]?.message?.tool_calls.forEach(tool => {
+                const args = JSON.parse(tool.function.arguments);
+                handleRelationTool(args.relation, userid);
+                handleFactTool(args.facts, userid);
+            });
+            const args = JSON.parse(completion.choices[0]?.message?.tool_calls[0].function.arguments);
+            return args.response
+        }
         return completion.choices[0]?.message?.content;
     }
-    
+
 }

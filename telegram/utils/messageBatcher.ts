@@ -12,7 +12,7 @@ export class MessageBatcher {
     maxTime: number = maxTimems;
     onFlush: FlushCallback;
 
-        constructor(
+    constructor(
         onFlush: FlushCallback,
         maxMessages?: number,
         maxTime?: number
@@ -30,7 +30,7 @@ export class MessageBatcher {
 
         this.messages.push(message)
         if (this.interval) return
-        
+
         this.interval = setTimeout(() => this.flush(), this.maxTime);
 
     }
@@ -39,10 +39,11 @@ export class MessageBatcher {
         const chunk = this.messages
         this.messages = []
         if (this.interval) {
-        clearTimeout(this.interval)
-        this.interval = null
+            clearTimeout(this.interval)
+            this.interval = null
         }
         this.onFlush(chunk)
-        
+        console.log("generating response in chat | chatID: " + chunk[0].chatId, "senderID:", chunk[0].senderId)
+
     }
 }

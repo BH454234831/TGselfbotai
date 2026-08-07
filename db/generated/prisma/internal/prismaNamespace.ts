@@ -754,7 +754,8 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const TelegramUserScalarFieldEnum = {
   id: 'id',
-  displayname: 'displayname'
+  displayname: 'displayname',
+  relationShipStart: 'relationShipStart'
 } as const
 
 export type TelegramUserScalarFieldEnum = (typeof TelegramUserScalarFieldEnum)[keyof typeof TelegramUserScalarFieldEnum]
@@ -762,6 +763,8 @@ export type TelegramUserScalarFieldEnum = (typeof TelegramUserScalarFieldEnum)[k
 
 export const FactsScalarFieldEnum = {
   id: 'id',
+  class: 'class',
+  content: 'content',
   telegramUserid: 'telegramUserid',
   important: 'important'
 } as const
@@ -777,8 +780,7 @@ export const RelationScalarFieldEnum = {
   respect: 'respect',
   affection: 'affection',
   conflict: 'conflict',
-  interactionFrequenct: 'interactionFrequenct',
-  relationshipDuration: 'relationshipDuration'
+  interactionFrequenct: 'interactionFrequenct'
 } as const
 
 export type RelationScalarFieldEnum = (typeof RelationScalarFieldEnum)[keyof typeof RelationScalarFieldEnum]
@@ -821,6 +823,13 @@ export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'String'
  */
 export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
