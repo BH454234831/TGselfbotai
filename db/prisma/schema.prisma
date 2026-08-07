@@ -18,6 +18,7 @@ displayname String
 
 facts Facts[]
 relation Relation[]
+messageHistory MessageHistory[]
 }
 
 model Facts {
@@ -38,4 +39,16 @@ model Relation {
   conflict Float
   interactionFrequenct Int
   relationshipDuration Int
+}
+
+model MessageHistory {
+  id Int @id @default(autoincrement())
+  messageid Int
+  user TelegramUser @relation(fields: [telegramUserid], references: [id])
+  telegramUserid BigInt
+  isMyMessage Boolean
+  content String
+  media Boolean @default(false)
+
+  @@unique([telegramUserid, messageid])
 }

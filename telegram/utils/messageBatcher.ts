@@ -29,7 +29,7 @@ export class MessageBatcher {
         }
 
         this.messages.push(message)
-        if (this.interval) return null
+        if (this.interval) return
         
         this.interval = setTimeout(() => this.flush(), this.maxTime);
 
@@ -43,5 +43,6 @@ export class MessageBatcher {
         this.interval = null
         }
         this.onFlush(chunk)
+        
     }
 }
