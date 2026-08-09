@@ -20,7 +20,7 @@ export async function NewMessageEventHandler(client: TelegramClient, aiclient: A
                 return;
             }
 
-            if (Number(sender.id) === Number(me.id)) {
+            if (Number(sender.id) === Number(me.id) && Number(sender.id) !== Number(message.chatId)) {
                 console.log("Manual message, skipping generation sender:", sender.id, "me:", me.id, "chatID:", message.chatId)
 
                 addNewMessage(message, getDisplayName(await client.getEntity(sender)), true)
@@ -41,25 +41,26 @@ export async function NewMessageEventHandler(client: TelegramClient, aiclient: A
                 batcher = new MessageBatcher(async (messages: Api.Message[]) => {
                     if (!messages) return
 
-                    await client.invoke(
-                        new Api.messages.SetTyping({
-                            peer: sender,
-                            action: new Api.SendMessageTypingAction(),
-                        })
-                    );
                     messages.forEach(m => {
                         m.markAsRead()
                     });
 
-                    const response = await AIBot.generateResponse(Number(messages[0].senderId));
+                    const typingtimer = setInterval(async () => (await client.invoke(
+                        new Api.messages.SetTyping({
+                            peer: sender,
+                            action: new Api.SendMessageTypingAction(),
+                        }))), 4000
+                    );
+
+                    const response = await AIBot.generateResponse(Number(message.chatId), 20);
 
                     if (!response) return
 
                     const responsemessage = await client.sendMessage(sender, {
                         message: response,
-                    })
+                    }).finally(() => clearInterval(typingtimer))
                     addNewMessage(message, getDisplayName(await client.getEntity(sender)), true)
-                    
+
                 });
                 batchers.set(senderId, batcher);
             }

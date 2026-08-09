@@ -3,6 +3,7 @@ import { masterPrompt, model, temperature, tools } from "./modelSettingsConst";
 import { prisma } from "../db/prisma/service";
 import { chunks } from "teleproto/Utils";
 import { handleFactTool, handleRelationTool } from "./tools/toolsHandler";
+import { message } from "teleproto/client";
 
 export class AIBot {
     private static clientAi: OpenAI;
@@ -14,18 +15,18 @@ export class AIBot {
         });
     }
 
-    static async generateResponse(userid: number) {
-        const dialogHistory = await prisma.messageHistory.findMany({ where: { telegramUserid: userid }, take: 20, select: { content: true, isMyMessage: true, user: true, messageid: true }, orderBy: { messageid: 'desc' } })
+    static async generateResponse(userid: number, fetchMessage: number) {
+        const dialogHistory = await prisma.messageHistory.findMany({ where: { telegramUserid: userid }, take: fetchMessage, select: { content: true, isMyMessage: true, user: true, messageid: true }, orderBy: { messageid: 'desc' } })
 
-        const facts = await prisma.facts.findMany({ select: { class: true, content: true, important: true } })
-        const relation = await prisma.relation.findFirst({
+        const facts = await prisma.facts.findMany({ where: { id: userid}, select: { class: true, content: true, important: true } })
+        const relation = await prisma.relation.findFirst({where: {id: userid},
             select: {
                 trust: true, warm: true, respect: true, affection: true, conflict: true
             }
         })
 
 
-        const factsPrompt = "Далее представлены факты о собеседнике в формате {content: Описание факта о человеке, class: Классификация факта, important: Важность от 0 до 1 в формате float}"
+        const factsPrompt = "Далее представлены факты о собеседнике в формате {content: Описание факта о человеке, class: Классификация факта, important: Важность от 0 до 1 в формате float}. Используй факты только при необходимости, например имя при обращении или если пользователь спрашивает о прошедших событиях о которых рассказывал, в остальное время игнорируй их"
             + JSON.stringify(facts)
         const relationPrompt = "Далее представлены твои отношения с собеседником в формате {trust: float; warm: float;respect: float;affection: float;conflict: float;} Значение 1 - максимальное, например максимальное доверие, теплота, симпатия или максимальная конфликтная ситуация. Значение 0 - минимальное"
             + JSON.stringify(relation)
@@ -60,6 +61,7 @@ export class AIBot {
                 handleFactTool(args.facts, userid);
             });
             const args = JSON.parse(completion.choices[0]?.message?.tool_calls[0].function.arguments);
+            console.log("generation response: ", args.response)
             return args.response
         }
         return completion.choices[0]?.message?.content;

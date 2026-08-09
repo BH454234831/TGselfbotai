@@ -8,7 +8,7 @@ export async function addNewMessage(message: Api.Message, displayName: string, i
             displayname: displayName,
             messageHistory: {
                 upsert: {
-                    where: {telegramUserid_messageid: {messageid: message.id, telegramUserid: Number(message.chatId)} },
+                    where: { telegramUserid_messageid: { messageid: message.id, telegramUserid: Number(message.chatId) } },
                     update: {},
                     create: {
                         messageid: message.id,

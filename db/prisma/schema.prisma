@@ -33,7 +33,7 @@ model Facts {
 model Relation {
   id                   Int          @id @default(autoincrement())
   user                 TelegramUser @relation(fields: [telegramUserid], references: [id])
-  telegramUserid       BigInt @unique
+  telegramUserid       BigInt       @unique
   trust                Float
   warm                 Float
   respect              Float
