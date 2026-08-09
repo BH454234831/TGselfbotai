@@ -19,6 +19,10 @@ model TelegramUser {
   facts             Facts[]
   relation          Relation[]
   messageHistory    MessageHistory[]
+  inException Boolean
+
+  createdAt DateTime
+  updatedAt DateTime
 }
 
 model Facts {
@@ -28,6 +32,9 @@ model Facts {
   user           TelegramUser @relation(fields: [telegramUserid], references: [id])
   telegramUserid BigInt
   important      Float
+
+  createdAt DateTime
+  updatedAt DateTime
 }
 
 model Relation {
@@ -40,6 +47,9 @@ model Relation {
   affection            Float
   conflict             Float
   interactionFrequenct Int
+
+  createdAt DateTime
+  updatedAt DateTime
 }
 
 model MessageHistory {
@@ -50,6 +60,9 @@ model MessageHistory {
   isMyMessage    Boolean
   content        String
   media          Boolean      @default(false)
+
+  createdAt DateTime
+  updatedAt DateTime
 
   @@unique([telegramUserid, messageid])
 }

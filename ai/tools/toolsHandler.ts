@@ -30,10 +30,11 @@ export async function handleRelationTool(args: any, userid: number) {
 export async function handleFactTool(args: any, userid: number) {
     console.log(args)
     if (!args) return
-    args.forEach(async (fact: { class: any; content: any; important?: 0.5 | undefined; }) => {
-        const { class: cls, content, important = 0.5 } = fact;
+    args.forEach(async (fact: { class: any; content: any; important?: 0.5 | undefined; id: number }) => {
+        const { class: cls, content, important = 0.5, id } = fact;
+
         const existing = await prisma.facts.findFirst({
-            where: { telegramUserid: userid, class: cls, content }
+            where: { id: id }
         });
         if (existing) {
             await prisma.facts.update({

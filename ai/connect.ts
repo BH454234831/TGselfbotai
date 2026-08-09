@@ -18,7 +18,7 @@ export class AIBot {
     static async generateResponse(userid: number, fetchMessage: number) {
         const dialogHistory = await prisma.messageHistory.findMany({ where: { telegramUserid: userid }, take: fetchMessage, select: { content: true, isMyMessage: true, user: true, messageid: true }, orderBy: { messageid: 'desc' } })
 
-        const facts = await prisma.facts.findMany({ where: { id: userid}, select: { class: true, content: true, important: true } })
+        const facts = await prisma.facts.findMany({ where: { telegramUserid: userid}, select: { id: true, class: true, content: true, important: true } })
         const relation = await prisma.relation.findFirst({where: {id: userid},
             select: {
                 trust: true, warm: true, respect: true, affection: true, conflict: true
