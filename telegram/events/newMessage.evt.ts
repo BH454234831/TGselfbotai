@@ -6,12 +6,24 @@ import { prisma } from "../../db/prisma/service";
 import { getDisplayName } from "teleproto/Utils";
 import { addNewMessage } from "../../db/prisma/service/messageService";
 
-export async function NewMessageEventHandler(client: TelegramClient, aiclient: AIBot) {
+export async function NewMessageEventHandler(client: TelegramClient) {
     const batchers = new Map<number, MessageBatcher>();
     client.addEventHandler(async (event: NewMessageEvent) => {
 
         const message = event.message;
         if (event.isPrivate) {
+
+            const inException = await prisma.telegramUser.findMany({ where: { id: Number(message.chatId) }, select: { inException: true, id: true } })
+            let extraprompt: string
+            let pathtomedia = ''
+            
+
+            if (inException[0].inException) {
+                console.log("User in exception skipping...", inException)
+                return;
+            }
+
+
             const sender = await message.getSender();
             const me = await client.getMe()
 
@@ -32,11 +44,53 @@ export async function NewMessageEventHandler(client: TelegramClient, aiclient: A
 
             const senderId = Number(sender?.id);
             if (message.media) {
-                console.log("Media detected | cant resolve rn")
-                return
+                console.log("Media detected")
+                
+                if (message.voice) {
+                    const buffer = await client.downloadMedia(message)
+
+                    await client.downloadMedia(message, {
+                        outputFile: `./telegram/downloadedFiles/${message.id}.ogg`,
+                    })
+
+                    console.log(buffer)
+
+                    if (!buffer || typeof buffer === 'string' ) return console.log("bad type")
+                    
+                    const content = await AIBot.generateTranscription(buffer, '.ogg')
+                    console.log(content)
+
+                    message.message = content
+                    
+                }
+
+                if (message.videoNote) {
+                    const buffer = await client.downloadMedia(message)
+
+                    await client.downloadMedia(message, {
+                        outputFile: `./telegram/downloadedFiles/${message.id}.mp4`,
+                    })
+
+                    pathtomedia = `./telegram/downloadedFiles/${message.id}.mp4`
+
+                    extraprompt = "Пользователь отправил кружок, тип видео в телеграмм, расшифровка голоса соответсвует последнему сообщению пользователя"
+
+                    if (!buffer || typeof buffer === 'string' ) return console.log("bad type")
+
+                    const content = await AIBot.generateTranscription(buffer, '.mp4')
+                    console.log(content)
+
+                    message.message = content
+                }
+
+                if (message.photo) {
+
+                }
+
             }
 
             let batcher = batchers.get(senderId);
+
             if (!batcher) {
                 batcher = new MessageBatcher(async (messages: Api.Message[]) => {
                     if (!messages) return
@@ -52,7 +106,7 @@ export async function NewMessageEventHandler(client: TelegramClient, aiclient: A
                         }))), 4000
                     );
 
-                    const response = await AIBot.generateResponse(Number(message.chatId), 20);
+                    const response = await AIBot.generateResponse(Number(message.chatId), 20, false, extraprompt, pathtomedia);
 
                     if (!response) return
 
@@ -65,7 +119,7 @@ export async function NewMessageEventHandler(client: TelegramClient, aiclient: A
                 batchers.set(senderId, batcher);
             }
 
-            addNewMessage(message, getDisplayName(await client.getEntity(sender)), false)
+            addNewMessage(message, getDisplayName(await client.getEntity(sender)), false, pathtomedia)
 
             batcher.add(message)
         }

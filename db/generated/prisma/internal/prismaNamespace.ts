@@ -755,7 +755,10 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const TelegramUserScalarFieldEnum = {
   id: 'id',
   displayname: 'displayname',
-  relationShipStart: 'relationShipStart'
+  relationShipStart: 'relationShipStart',
+  inException: 'inException',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type TelegramUserScalarFieldEnum = (typeof TelegramUserScalarFieldEnum)[keyof typeof TelegramUserScalarFieldEnum]
@@ -766,7 +769,9 @@ export const FactsScalarFieldEnum = {
   class: 'class',
   content: 'content',
   telegramUserid: 'telegramUserid',
-  important: 'important'
+  important: 'important',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type FactsScalarFieldEnum = (typeof FactsScalarFieldEnum)[keyof typeof FactsScalarFieldEnum]
@@ -780,7 +785,9 @@ export const RelationScalarFieldEnum = {
   respect: 'respect',
   affection: 'affection',
   conflict: 'conflict',
-  interactionFrequenct: 'interactionFrequenct'
+  interactionFrequenct: 'interactionFrequenct',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type RelationScalarFieldEnum = (typeof RelationScalarFieldEnum)[keyof typeof RelationScalarFieldEnum]
@@ -792,7 +799,10 @@ export const MessageHistoryScalarFieldEnum = {
   telegramUserid: 'telegramUserid',
   isMyMessage: 'isMyMessage',
   content: 'content',
-  media: 'media'
+  media: 'media',
+  pathToMedia: 'pathToMedia',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type MessageHistoryScalarFieldEnum = (typeof MessageHistoryScalarFieldEnum)[keyof typeof MessageHistoryScalarFieldEnum]
@@ -834,6 +844,13 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -844,13 +861,6 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 /**

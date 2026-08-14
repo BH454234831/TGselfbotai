@@ -5,9 +5,7 @@ import { StringSession } from "teleproto/sessions";
 import { createInterface } from "node:readline/promises";
 import { NewMessageEventHandler } from "./events/newmessage.evt";
 
-const input = require("input");
-
-export async function telegramBootstrap(aiclient: AIBot): Promise<TelegramClient> {
+export async function telegramBootstrap(): Promise<TelegramClient> {
 
     const rl = createInterface({ input: process.stdin, output: process.stdout });
 
@@ -37,7 +35,7 @@ export async function telegramBootstrap(aiclient: AIBot): Promise<TelegramClient
         throw new Error("Not authorized");
     }
 
-    await NewMessageEventHandler(client, aiclient);
+    await NewMessageEventHandler(client);
 
     return client;
 }

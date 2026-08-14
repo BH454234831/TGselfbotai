@@ -2,6 +2,7 @@ import { createInterface } from "node:readline/promises";
 import { TelegramClient, utils } from "teleproto";
 import { StringSession } from "teleproto/sessions";
 import { prisma } from "../db/prisma/service";
+import { AIBot } from "../ai/connect";
 
 async function start() {
     const rl = createInterface({ input: process.stdin, output: process.stdout });
@@ -36,41 +37,61 @@ async function start() {
         where: { id: Number(me.id) },
         update: {
             id: Number(me.id),
-            displayname: utils.getDisplayName(me)
+            displayname: utils.getDisplayName(me),
+            updatedAt: new Date()
         },
         create: {
             id: Number(me.id),
             displayname: utils.getDisplayName(me),
-            relationShipStart: new Date()
+            relationShipStart: new Date(),
+            inException: false,
+            createdAt: new Date(),
+            updatedAt: new Date()
         }
     });
-    let transactionData: { messageid: number, telegramUserid: number, isMyMessage: boolean, content: string, media: boolean }[] = []
-    for await (const dialog of client.iterDialogs({ limit: 10, ignorePinned: true, archived: false })) {
+    const clientai = new AIBot()
+    let transactionData: { messageid: number, telegramUserid: number, isMyMessage: boolean, content: string, media: boolean, createdAt: Date, updatedAt: Date }[] = []
+    
+    for await (const dialog of client.iterDialogs({ limit: 5, ignorePinned: true, folder: 0 })) {
         if (!dialog.id || !dialog.entity) continue
-        const messages = await client.getMessages(dialog.entity, { limit: 200 })
+
+        const messages = await client.getMessages(dialog.entity)
         const entity = await client.getEntity(dialog.id)
         const displayName = utils.getDisplayName(entity)
+
         await prisma.telegramUser.upsert({
             where: { id: Number(dialog.id) },
             update: {
                 id: Number(dialog.id),
-                displayname: displayName
+                displayname: displayName,
+                updatedAt: new Date()
             },
             create: {
                 id: Number(dialog.id),
                 displayname: displayName,
-                relationShipStart: new Date()
+                relationShipStart: new Date(),
+                inException: false,
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         });
+
         console.log(Number(dialog.id), displayName)
+
         messages.forEach(message => {
             if (!message.message && !message.id && message.message == "") return
-            transactionData.push({ messageid: message.id, telegramUserid: Number(dialog.id), isMyMessage: Number(message.senderId) === Number(me.id) ? true : false, content: message.message ?? '', media: message.media ? true : false })
+            transactionData.push({ messageid: message.id, telegramUserid: Number(dialog.id), isMyMessage: Number(message.senderId) === Number(me.id) ? true : false, content: message.message ?? '', media: message.media ? true : false, createdAt: new Date(), updatedAt: new Date() })
         });
+
+        await prisma.messageHistory.createMany({
+            data: transactionData,
+        })
+
+        const res = await AIBot.generateResponse(transactionData[0].telegramUserid, Math.min(transactionData.length, 10000), true)
+        console.log(res)
+        transactionData = []
     }
-    const transaction = await prisma.messageHistory.createMany({
-        data: transactionData,
-    }).catch();
+
     console.log("DONE!")
 }
 

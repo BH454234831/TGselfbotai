@@ -57,6 +57,8 @@ export type RelationMinAggregateOutputType = {
   affection: number | null
   conflict: number | null
   interactionFrequenct: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type RelationMaxAggregateOutputType = {
@@ -68,6 +70,8 @@ export type RelationMaxAggregateOutputType = {
   affection: number | null
   conflict: number | null
   interactionFrequenct: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type RelationCountAggregateOutputType = {
@@ -79,6 +83,8 @@ export type RelationCountAggregateOutputType = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -114,6 +120,8 @@ export type RelationMinAggregateInputType = {
   affection?: true
   conflict?: true
   interactionFrequenct?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type RelationMaxAggregateInputType = {
@@ -125,6 +133,8 @@ export type RelationMaxAggregateInputType = {
   affection?: true
   conflict?: true
   interactionFrequenct?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type RelationCountAggregateInputType = {
@@ -136,6 +146,8 @@ export type RelationCountAggregateInputType = {
   affection?: true
   conflict?: true
   interactionFrequenct?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -234,6 +246,8 @@ export type RelationGroupByOutputType = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: Date
+  updatedAt: Date
   _count: RelationCountAggregateOutputType | null
   _avg: RelationAvgAggregateOutputType | null
   _sum: RelationSumAggregateOutputType | null
@@ -268,6 +282,8 @@ export type RelationWhereInput = {
   affection?: Prisma.FloatFilter<"Relation"> | number
   conflict?: Prisma.FloatFilter<"Relation"> | number
   interactionFrequenct?: Prisma.IntFilter<"Relation"> | number
+  createdAt?: Prisma.DateTimeFilter<"Relation"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Relation"> | Date | string
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
 }
 
@@ -280,6 +296,8 @@ export type RelationOrderByWithRelationInput = {
   affection?: Prisma.SortOrder
   conflict?: Prisma.SortOrder
   interactionFrequenct?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   user?: Prisma.TelegramUserOrderByWithRelationInput
 }
 
@@ -295,6 +313,8 @@ export type RelationWhereUniqueInput = Prisma.AtLeast<{
   affection?: Prisma.FloatFilter<"Relation"> | number
   conflict?: Prisma.FloatFilter<"Relation"> | number
   interactionFrequenct?: Prisma.IntFilter<"Relation"> | number
+  createdAt?: Prisma.DateTimeFilter<"Relation"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Relation"> | Date | string
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
 }, "id" | "telegramUserid">
 
@@ -307,6 +327,8 @@ export type RelationOrderByWithAggregationInput = {
   affection?: Prisma.SortOrder
   conflict?: Prisma.SortOrder
   interactionFrequenct?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.RelationCountOrderByAggregateInput
   _avg?: Prisma.RelationAvgOrderByAggregateInput
   _max?: Prisma.RelationMaxOrderByAggregateInput
@@ -326,6 +348,8 @@ export type RelationScalarWhereWithAggregatesInput = {
   affection?: Prisma.FloatWithAggregatesFilter<"Relation"> | number
   conflict?: Prisma.FloatWithAggregatesFilter<"Relation"> | number
   interactionFrequenct?: Prisma.IntWithAggregatesFilter<"Relation"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Relation"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Relation"> | Date | string
 }
 
 export type RelationCreateInput = {
@@ -335,6 +359,8 @@ export type RelationCreateInput = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: Date | string
+  updatedAt: Date | string
   user: Prisma.TelegramUserCreateNestedOneWithoutRelationInput
 }
 
@@ -347,6 +373,8 @@ export type RelationUncheckedCreateInput = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type RelationUpdateInput = {
@@ -356,6 +384,8 @@ export type RelationUpdateInput = {
   affection?: Prisma.FloatFieldUpdateOperationsInput | number
   conflict?: Prisma.FloatFieldUpdateOperationsInput | number
   interactionFrequenct?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.TelegramUserUpdateOneRequiredWithoutRelationNestedInput
 }
 
@@ -368,6 +398,8 @@ export type RelationUncheckedUpdateInput = {
   affection?: Prisma.FloatFieldUpdateOperationsInput | number
   conflict?: Prisma.FloatFieldUpdateOperationsInput | number
   interactionFrequenct?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RelationCreateManyInput = {
@@ -379,6 +411,8 @@ export type RelationCreateManyInput = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type RelationUpdateManyMutationInput = {
@@ -388,6 +422,8 @@ export type RelationUpdateManyMutationInput = {
   affection?: Prisma.FloatFieldUpdateOperationsInput | number
   conflict?: Prisma.FloatFieldUpdateOperationsInput | number
   interactionFrequenct?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RelationUncheckedUpdateManyInput = {
@@ -399,6 +435,8 @@ export type RelationUncheckedUpdateManyInput = {
   affection?: Prisma.FloatFieldUpdateOperationsInput | number
   conflict?: Prisma.FloatFieldUpdateOperationsInput | number
   interactionFrequenct?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RelationListRelationFilter = {
@@ -420,6 +458,8 @@ export type RelationCountOrderByAggregateInput = {
   affection?: Prisma.SortOrder
   conflict?: Prisma.SortOrder
   interactionFrequenct?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RelationAvgOrderByAggregateInput = {
@@ -442,6 +482,8 @@ export type RelationMaxOrderByAggregateInput = {
   affection?: Prisma.SortOrder
   conflict?: Prisma.SortOrder
   interactionFrequenct?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RelationMinOrderByAggregateInput = {
@@ -453,6 +495,8 @@ export type RelationMinOrderByAggregateInput = {
   affection?: Prisma.SortOrder
   conflict?: Prisma.SortOrder
   interactionFrequenct?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RelationSumOrderByAggregateInput = {
@@ -515,6 +559,8 @@ export type RelationCreateWithoutUserInput = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type RelationUncheckedCreateWithoutUserInput = {
@@ -525,6 +571,8 @@ export type RelationUncheckedCreateWithoutUserInput = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type RelationCreateOrConnectWithoutUserInput = {
@@ -564,6 +612,8 @@ export type RelationScalarWhereInput = {
   affection?: Prisma.FloatFilter<"Relation"> | number
   conflict?: Prisma.FloatFilter<"Relation"> | number
   interactionFrequenct?: Prisma.IntFilter<"Relation"> | number
+  createdAt?: Prisma.DateTimeFilter<"Relation"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Relation"> | Date | string
 }
 
 export type RelationCreateManyUserInput = {
@@ -574,6 +624,8 @@ export type RelationCreateManyUserInput = {
   affection: number
   conflict: number
   interactionFrequenct: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type RelationUpdateWithoutUserInput = {
@@ -583,6 +635,8 @@ export type RelationUpdateWithoutUserInput = {
   affection?: Prisma.FloatFieldUpdateOperationsInput | number
   conflict?: Prisma.FloatFieldUpdateOperationsInput | number
   interactionFrequenct?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RelationUncheckedUpdateWithoutUserInput = {
@@ -593,6 +647,8 @@ export type RelationUncheckedUpdateWithoutUserInput = {
   affection?: Prisma.FloatFieldUpdateOperationsInput | number
   conflict?: Prisma.FloatFieldUpdateOperationsInput | number
   interactionFrequenct?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RelationUncheckedUpdateManyWithoutUserInput = {
@@ -603,6 +659,8 @@ export type RelationUncheckedUpdateManyWithoutUserInput = {
   affection?: Prisma.FloatFieldUpdateOperationsInput | number
   conflict?: Prisma.FloatFieldUpdateOperationsInput | number
   interactionFrequenct?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -616,6 +674,8 @@ export type RelationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   affection?: boolean
   conflict?: boolean
   interactionFrequenct?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["relation"]>
 
@@ -628,6 +688,8 @@ export type RelationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   affection?: boolean
   conflict?: boolean
   interactionFrequenct?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["relation"]>
 
@@ -640,6 +702,8 @@ export type RelationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   affection?: boolean
   conflict?: boolean
   interactionFrequenct?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["relation"]>
 
@@ -652,9 +716,11 @@ export type RelationSelectScalar = {
   affection?: boolean
   conflict?: boolean
   interactionFrequenct?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type RelationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "telegramUserid" | "trust" | "warm" | "respect" | "affection" | "conflict" | "interactionFrequenct", ExtArgs["result"]["relation"]>
+export type RelationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "telegramUserid" | "trust" | "warm" | "respect" | "affection" | "conflict" | "interactionFrequenct" | "createdAt" | "updatedAt", ExtArgs["result"]["relation"]>
 export type RelationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }
@@ -679,6 +745,8 @@ export type $RelationPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     affection: number
     conflict: number
     interactionFrequenct: number
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["relation"]>
   composites: {}
 }
@@ -1111,6 +1179,8 @@ export interface RelationFieldRefs {
   readonly affection: Prisma.FieldRef<"Relation", 'Float'>
   readonly conflict: Prisma.FieldRef<"Relation", 'Float'>
   readonly interactionFrequenct: Prisma.FieldRef<"Relation", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Relation", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Relation", 'DateTime'>
 }
     
 

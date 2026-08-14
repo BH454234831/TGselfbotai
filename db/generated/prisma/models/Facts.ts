@@ -44,6 +44,8 @@ export type FactsMinAggregateOutputType = {
   content: string | null
   telegramUserid: bigint | null
   important: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type FactsMaxAggregateOutputType = {
@@ -52,6 +54,8 @@ export type FactsMaxAggregateOutputType = {
   content: string | null
   telegramUserid: bigint | null
   important: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type FactsCountAggregateOutputType = {
@@ -60,6 +64,8 @@ export type FactsCountAggregateOutputType = {
   content: number
   telegramUserid: number
   important: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -82,6 +88,8 @@ export type FactsMinAggregateInputType = {
   content?: true
   telegramUserid?: true
   important?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type FactsMaxAggregateInputType = {
@@ -90,6 +98,8 @@ export type FactsMaxAggregateInputType = {
   content?: true
   telegramUserid?: true
   important?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type FactsCountAggregateInputType = {
@@ -98,6 +108,8 @@ export type FactsCountAggregateInputType = {
   content?: true
   telegramUserid?: true
   important?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -193,6 +205,8 @@ export type FactsGroupByOutputType = {
   content: string
   telegramUserid: bigint
   important: number
+  createdAt: Date
+  updatedAt: Date
   _count: FactsCountAggregateOutputType | null
   _avg: FactsAvgAggregateOutputType | null
   _sum: FactsSumAggregateOutputType | null
@@ -224,6 +238,8 @@ export type FactsWhereInput = {
   content?: Prisma.StringFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntFilter<"Facts"> | bigint | number
   important?: Prisma.FloatFilter<"Facts"> | number
+  createdAt?: Prisma.DateTimeFilter<"Facts"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Facts"> | Date | string
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
 }
 
@@ -233,6 +249,8 @@ export type FactsOrderByWithRelationInput = {
   content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   user?: Prisma.TelegramUserOrderByWithRelationInput
 }
 
@@ -245,6 +263,8 @@ export type FactsWhereUniqueInput = Prisma.AtLeast<{
   content?: Prisma.StringFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntFilter<"Facts"> | bigint | number
   important?: Prisma.FloatFilter<"Facts"> | number
+  createdAt?: Prisma.DateTimeFilter<"Facts"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Facts"> | Date | string
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
 }, "id">
 
@@ -254,6 +274,8 @@ export type FactsOrderByWithAggregationInput = {
   content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.FactsCountOrderByAggregateInput
   _avg?: Prisma.FactsAvgOrderByAggregateInput
   _max?: Prisma.FactsMaxOrderByAggregateInput
@@ -270,12 +292,16 @@ export type FactsScalarWhereWithAggregatesInput = {
   content?: Prisma.StringWithAggregatesFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntWithAggregatesFilter<"Facts"> | bigint | number
   important?: Prisma.FloatWithAggregatesFilter<"Facts"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Facts"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Facts"> | Date | string
 }
 
 export type FactsCreateInput = {
   class: string
   content: string
   important: number
+  createdAt: Date | string
+  updatedAt: Date | string
   user: Prisma.TelegramUserCreateNestedOneWithoutFactsInput
 }
 
@@ -285,12 +311,16 @@ export type FactsUncheckedCreateInput = {
   content: string
   telegramUserid: bigint | number
   important: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type FactsUpdateInput = {
   class?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.TelegramUserUpdateOneRequiredWithoutFactsNestedInput
 }
 
@@ -300,6 +330,8 @@ export type FactsUncheckedUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   telegramUserid?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   important?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FactsCreateManyInput = {
@@ -308,12 +340,16 @@ export type FactsCreateManyInput = {
   content: string
   telegramUserid: bigint | number
   important: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type FactsUpdateManyMutationInput = {
   class?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FactsUncheckedUpdateManyInput = {
@@ -322,6 +358,8 @@ export type FactsUncheckedUpdateManyInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   telegramUserid?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   important?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FactsListRelationFilter = {
@@ -340,6 +378,8 @@ export type FactsCountOrderByAggregateInput = {
   content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type FactsAvgOrderByAggregateInput = {
@@ -354,6 +394,8 @@ export type FactsMaxOrderByAggregateInput = {
   content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type FactsMinOrderByAggregateInput = {
@@ -362,6 +404,8 @@ export type FactsMinOrderByAggregateInput = {
   content?: Prisma.SortOrder
   telegramUserid?: Prisma.SortOrder
   important?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type FactsSumOrderByAggregateInput = {
@@ -432,6 +476,8 @@ export type FactsCreateWithoutUserInput = {
   class: string
   content: string
   important: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type FactsUncheckedCreateWithoutUserInput = {
@@ -439,6 +485,8 @@ export type FactsUncheckedCreateWithoutUserInput = {
   class: string
   content: string
   important: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type FactsCreateOrConnectWithoutUserInput = {
@@ -475,6 +523,8 @@ export type FactsScalarWhereInput = {
   content?: Prisma.StringFilter<"Facts"> | string
   telegramUserid?: Prisma.BigIntFilter<"Facts"> | bigint | number
   important?: Prisma.FloatFilter<"Facts"> | number
+  createdAt?: Prisma.DateTimeFilter<"Facts"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Facts"> | Date | string
 }
 
 export type FactsCreateManyUserInput = {
@@ -482,12 +532,16 @@ export type FactsCreateManyUserInput = {
   class: string
   content: string
   important: number
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type FactsUpdateWithoutUserInput = {
   class?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FactsUncheckedUpdateWithoutUserInput = {
@@ -495,6 +549,8 @@ export type FactsUncheckedUpdateWithoutUserInput = {
   class?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FactsUncheckedUpdateManyWithoutUserInput = {
@@ -502,6 +558,8 @@ export type FactsUncheckedUpdateManyWithoutUserInput = {
   class?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   important?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -512,6 +570,8 @@ export type FactsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   content?: boolean
   telegramUserid?: boolean
   important?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facts"]>
 
@@ -521,6 +581,8 @@ export type FactsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   content?: boolean
   telegramUserid?: boolean
   important?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facts"]>
 
@@ -530,6 +592,8 @@ export type FactsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   content?: boolean
   telegramUserid?: boolean
   important?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facts"]>
 
@@ -539,9 +603,11 @@ export type FactsSelectScalar = {
   content?: boolean
   telegramUserid?: boolean
   important?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type FactsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "class" | "content" | "telegramUserid" | "important", ExtArgs["result"]["facts"]>
+export type FactsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "class" | "content" | "telegramUserid" | "important" | "createdAt" | "updatedAt", ExtArgs["result"]["facts"]>
 export type FactsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }
@@ -563,6 +629,8 @@ export type $FactsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     content: string
     telegramUserid: bigint
     important: number
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["facts"]>
   composites: {}
 }
@@ -992,6 +1060,8 @@ export interface FactsFieldRefs {
   readonly content: Prisma.FieldRef<"Facts", 'String'>
   readonly telegramUserid: Prisma.FieldRef<"Facts", 'BigInt'>
   readonly important: Prisma.FieldRef<"Facts", 'Float'>
+  readonly createdAt: Prisma.FieldRef<"Facts", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Facts", 'DateTime'>
 }
     
 

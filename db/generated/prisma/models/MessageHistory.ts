@@ -45,6 +45,9 @@ export type MessageHistoryMinAggregateOutputType = {
   isMyMessage: boolean | null
   content: string | null
   media: boolean | null
+  pathToMedia: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type MessageHistoryMaxAggregateOutputType = {
@@ -54,6 +57,9 @@ export type MessageHistoryMaxAggregateOutputType = {
   isMyMessage: boolean | null
   content: string | null
   media: boolean | null
+  pathToMedia: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type MessageHistoryCountAggregateOutputType = {
@@ -63,6 +69,9 @@ export type MessageHistoryCountAggregateOutputType = {
   isMyMessage: number
   content: number
   media: number
+  pathToMedia: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -86,6 +95,9 @@ export type MessageHistoryMinAggregateInputType = {
   isMyMessage?: true
   content?: true
   media?: true
+  pathToMedia?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type MessageHistoryMaxAggregateInputType = {
@@ -95,6 +107,9 @@ export type MessageHistoryMaxAggregateInputType = {
   isMyMessage?: true
   content?: true
   media?: true
+  pathToMedia?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type MessageHistoryCountAggregateInputType = {
@@ -104,6 +119,9 @@ export type MessageHistoryCountAggregateInputType = {
   isMyMessage?: true
   content?: true
   media?: true
+  pathToMedia?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -200,6 +218,9 @@ export type MessageHistoryGroupByOutputType = {
   isMyMessage: boolean
   content: string
   media: boolean
+  pathToMedia: string
+  createdAt: Date
+  updatedAt: Date
   _count: MessageHistoryCountAggregateOutputType | null
   _avg: MessageHistoryAvgAggregateOutputType | null
   _sum: MessageHistorySumAggregateOutputType | null
@@ -232,6 +253,9 @@ export type MessageHistoryWhereInput = {
   isMyMessage?: Prisma.BoolFilter<"MessageHistory"> | boolean
   content?: Prisma.StringFilter<"MessageHistory"> | string
   media?: Prisma.BoolFilter<"MessageHistory"> | boolean
+  pathToMedia?: Prisma.StringFilter<"MessageHistory"> | string
+  createdAt?: Prisma.DateTimeFilter<"MessageHistory"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MessageHistory"> | Date | string
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
 }
 
@@ -242,6 +266,9 @@ export type MessageHistoryOrderByWithRelationInput = {
   isMyMessage?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
+  pathToMedia?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   user?: Prisma.TelegramUserOrderByWithRelationInput
 }
 
@@ -256,6 +283,9 @@ export type MessageHistoryWhereUniqueInput = Prisma.AtLeast<{
   isMyMessage?: Prisma.BoolFilter<"MessageHistory"> | boolean
   content?: Prisma.StringFilter<"MessageHistory"> | string
   media?: Prisma.BoolFilter<"MessageHistory"> | boolean
+  pathToMedia?: Prisma.StringFilter<"MessageHistory"> | string
+  createdAt?: Prisma.DateTimeFilter<"MessageHistory"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MessageHistory"> | Date | string
   user?: Prisma.XOR<Prisma.TelegramUserScalarRelationFilter, Prisma.TelegramUserWhereInput>
 }, "id" | "telegramUserid_messageid">
 
@@ -266,6 +296,9 @@ export type MessageHistoryOrderByWithAggregationInput = {
   isMyMessage?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
+  pathToMedia?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.MessageHistoryCountOrderByAggregateInput
   _avg?: Prisma.MessageHistoryAvgOrderByAggregateInput
   _max?: Prisma.MessageHistoryMaxOrderByAggregateInput
@@ -283,6 +316,9 @@ export type MessageHistoryScalarWhereWithAggregatesInput = {
   isMyMessage?: Prisma.BoolWithAggregatesFilter<"MessageHistory"> | boolean
   content?: Prisma.StringWithAggregatesFilter<"MessageHistory"> | string
   media?: Prisma.BoolWithAggregatesFilter<"MessageHistory"> | boolean
+  pathToMedia?: Prisma.StringWithAggregatesFilter<"MessageHistory"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"MessageHistory"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MessageHistory"> | Date | string
 }
 
 export type MessageHistoryCreateInput = {
@@ -290,6 +326,9 @@ export type MessageHistoryCreateInput = {
   isMyMessage: boolean
   content: string
   media?: boolean
+  pathToMedia: string
+  createdAt: Date | string
+  updatedAt: Date | string
   user: Prisma.TelegramUserCreateNestedOneWithoutMessageHistoryInput
 }
 
@@ -300,6 +339,9 @@ export type MessageHistoryUncheckedCreateInput = {
   isMyMessage: boolean
   content: string
   media?: boolean
+  pathToMedia: string
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type MessageHistoryUpdateInput = {
@@ -307,6 +349,9 @@ export type MessageHistoryUpdateInput = {
   isMyMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pathToMedia?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.TelegramUserUpdateOneRequiredWithoutMessageHistoryNestedInput
 }
 
@@ -317,6 +362,9 @@ export type MessageHistoryUncheckedUpdateInput = {
   isMyMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pathToMedia?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageHistoryCreateManyInput = {
@@ -326,6 +374,9 @@ export type MessageHistoryCreateManyInput = {
   isMyMessage: boolean
   content: string
   media?: boolean
+  pathToMedia: string
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type MessageHistoryUpdateManyMutationInput = {
@@ -333,6 +384,9 @@ export type MessageHistoryUpdateManyMutationInput = {
   isMyMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pathToMedia?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageHistoryUncheckedUpdateManyInput = {
@@ -342,6 +396,9 @@ export type MessageHistoryUncheckedUpdateManyInput = {
   isMyMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pathToMedia?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageHistoryListRelationFilter = {
@@ -366,6 +423,9 @@ export type MessageHistoryCountOrderByAggregateInput = {
   isMyMessage?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
+  pathToMedia?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MessageHistoryAvgOrderByAggregateInput = {
@@ -381,6 +441,9 @@ export type MessageHistoryMaxOrderByAggregateInput = {
   isMyMessage?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
+  pathToMedia?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MessageHistoryMinOrderByAggregateInput = {
@@ -390,6 +453,9 @@ export type MessageHistoryMinOrderByAggregateInput = {
   isMyMessage?: Prisma.SortOrder
   content?: Prisma.SortOrder
   media?: Prisma.SortOrder
+  pathToMedia?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MessageHistorySumOrderByAggregateInput = {
@@ -440,15 +506,14 @@ export type MessageHistoryUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.MessageHistoryScalarWhereInput | Prisma.MessageHistoryScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type MessageHistoryCreateWithoutUserInput = {
   messageid: number
   isMyMessage: boolean
   content: string
   media?: boolean
+  pathToMedia: string
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type MessageHistoryUncheckedCreateWithoutUserInput = {
@@ -457,6 +522,9 @@ export type MessageHistoryUncheckedCreateWithoutUserInput = {
   isMyMessage: boolean
   content: string
   media?: boolean
+  pathToMedia: string
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type MessageHistoryCreateOrConnectWithoutUserInput = {
@@ -494,6 +562,9 @@ export type MessageHistoryScalarWhereInput = {
   isMyMessage?: Prisma.BoolFilter<"MessageHistory"> | boolean
   content?: Prisma.StringFilter<"MessageHistory"> | string
   media?: Prisma.BoolFilter<"MessageHistory"> | boolean
+  pathToMedia?: Prisma.StringFilter<"MessageHistory"> | string
+  createdAt?: Prisma.DateTimeFilter<"MessageHistory"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"MessageHistory"> | Date | string
 }
 
 export type MessageHistoryCreateManyUserInput = {
@@ -502,6 +573,9 @@ export type MessageHistoryCreateManyUserInput = {
   isMyMessage: boolean
   content: string
   media?: boolean
+  pathToMedia: string
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type MessageHistoryUpdateWithoutUserInput = {
@@ -509,6 +583,9 @@ export type MessageHistoryUpdateWithoutUserInput = {
   isMyMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pathToMedia?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageHistoryUncheckedUpdateWithoutUserInput = {
@@ -517,6 +594,9 @@ export type MessageHistoryUncheckedUpdateWithoutUserInput = {
   isMyMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pathToMedia?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageHistoryUncheckedUpdateManyWithoutUserInput = {
@@ -525,6 +605,9 @@ export type MessageHistoryUncheckedUpdateManyWithoutUserInput = {
   isMyMessage?: Prisma.BoolFieldUpdateOperationsInput | boolean
   content?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pathToMedia?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -536,6 +619,9 @@ export type MessageHistorySelect<ExtArgs extends runtime.Types.Extensions.Intern
   isMyMessage?: boolean
   content?: boolean
   media?: boolean
+  pathToMedia?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["messageHistory"]>
 
@@ -546,6 +632,9 @@ export type MessageHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Type
   isMyMessage?: boolean
   content?: boolean
   media?: boolean
+  pathToMedia?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["messageHistory"]>
 
@@ -556,6 +645,9 @@ export type MessageHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   isMyMessage?: boolean
   content?: boolean
   media?: boolean
+  pathToMedia?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["messageHistory"]>
 
@@ -566,9 +658,12 @@ export type MessageHistorySelectScalar = {
   isMyMessage?: boolean
   content?: boolean
   media?: boolean
+  pathToMedia?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type MessageHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "messageid" | "telegramUserid" | "isMyMessage" | "content" | "media", ExtArgs["result"]["messageHistory"]>
+export type MessageHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "messageid" | "telegramUserid" | "isMyMessage" | "content" | "media" | "pathToMedia" | "createdAt" | "updatedAt", ExtArgs["result"]["messageHistory"]>
 export type MessageHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.TelegramUserDefaultArgs<ExtArgs>
 }
@@ -591,6 +686,9 @@ export type $MessageHistoryPayload<ExtArgs extends runtime.Types.Extensions.Inte
     isMyMessage: boolean
     content: string
     media: boolean
+    pathToMedia: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["messageHistory"]>
   composites: {}
 }
@@ -1021,6 +1119,9 @@ export interface MessageHistoryFieldRefs {
   readonly isMyMessage: Prisma.FieldRef<"MessageHistory", 'Boolean'>
   readonly content: Prisma.FieldRef<"MessageHistory", 'String'>
   readonly media: Prisma.FieldRef<"MessageHistory", 'Boolean'>
+  readonly pathToMedia: Prisma.FieldRef<"MessageHistory", 'String'>
+  readonly createdAt: Prisma.FieldRef<"MessageHistory", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"MessageHistory", 'DateTime'>
 }
     
 

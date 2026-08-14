@@ -6,7 +6,7 @@ dotenv.config();
 
 async function main() {
     const clientAi = await createAiBot();
-    const client = await telegramBootstrap(clientAi);
+    const client = await telegramBootstrap();
 }
 
 main().catch(console.error);

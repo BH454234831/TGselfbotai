@@ -38,18 +38,27 @@ export type TelegramUserMinAggregateOutputType = {
   id: bigint | null
   displayname: string | null
   relationShipStart: Date | null
+  inException: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type TelegramUserMaxAggregateOutputType = {
   id: bigint | null
   displayname: string | null
   relationShipStart: Date | null
+  inException: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type TelegramUserCountAggregateOutputType = {
   id: number
   displayname: number
   relationShipStart: number
+  inException: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -66,18 +75,27 @@ export type TelegramUserMinAggregateInputType = {
   id?: true
   displayname?: true
   relationShipStart?: true
+  inException?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type TelegramUserMaxAggregateInputType = {
   id?: true
   displayname?: true
   relationShipStart?: true
+  inException?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type TelegramUserCountAggregateInputType = {
   id?: true
   displayname?: true
   relationShipStart?: true
+  inException?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -171,6 +189,9 @@ export type TelegramUserGroupByOutputType = {
   id: bigint
   displayname: string
   relationShipStart: Date
+  inException: boolean
+  createdAt: Date
+  updatedAt: Date
   _count: TelegramUserCountAggregateOutputType | null
   _avg: TelegramUserAvgAggregateOutputType | null
   _sum: TelegramUserSumAggregateOutputType | null
@@ -200,6 +221,9 @@ export type TelegramUserWhereInput = {
   id?: Prisma.BigIntFilter<"TelegramUser"> | bigint | number
   displayname?: Prisma.StringFilter<"TelegramUser"> | string
   relationShipStart?: Prisma.DateTimeFilter<"TelegramUser"> | Date | string
+  inException?: Prisma.BoolFilter<"TelegramUser"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"TelegramUser"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"TelegramUser"> | Date | string
   facts?: Prisma.FactsListRelationFilter
   relation?: Prisma.RelationListRelationFilter
   messageHistory?: Prisma.MessageHistoryListRelationFilter
@@ -209,6 +233,9 @@ export type TelegramUserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   displayname?: Prisma.SortOrder
   relationShipStart?: Prisma.SortOrder
+  inException?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   facts?: Prisma.FactsOrderByRelationAggregateInput
   relation?: Prisma.RelationOrderByRelationAggregateInput
   messageHistory?: Prisma.MessageHistoryOrderByRelationAggregateInput
@@ -221,6 +248,9 @@ export type TelegramUserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TelegramUserWhereInput | Prisma.TelegramUserWhereInput[]
   displayname?: Prisma.StringFilter<"TelegramUser"> | string
   relationShipStart?: Prisma.DateTimeFilter<"TelegramUser"> | Date | string
+  inException?: Prisma.BoolFilter<"TelegramUser"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"TelegramUser"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"TelegramUser"> | Date | string
   facts?: Prisma.FactsListRelationFilter
   relation?: Prisma.RelationListRelationFilter
   messageHistory?: Prisma.MessageHistoryListRelationFilter
@@ -230,6 +260,9 @@ export type TelegramUserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   displayname?: Prisma.SortOrder
   relationShipStart?: Prisma.SortOrder
+  inException?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.TelegramUserCountOrderByAggregateInput
   _avg?: Prisma.TelegramUserAvgOrderByAggregateInput
   _max?: Prisma.TelegramUserMaxOrderByAggregateInput
@@ -244,12 +277,18 @@ export type TelegramUserScalarWhereWithAggregatesInput = {
   id?: Prisma.BigIntWithAggregatesFilter<"TelegramUser"> | bigint | number
   displayname?: Prisma.StringWithAggregatesFilter<"TelegramUser"> | string
   relationShipStart?: Prisma.DateTimeWithAggregatesFilter<"TelegramUser"> | Date | string
+  inException?: Prisma.BoolWithAggregatesFilter<"TelegramUser"> | boolean
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"TelegramUser"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"TelegramUser"> | Date | string
 }
 
 export type TelegramUserCreateInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   facts?: Prisma.FactsCreateNestedManyWithoutUserInput
   relation?: Prisma.RelationCreateNestedManyWithoutUserInput
   messageHistory?: Prisma.MessageHistoryCreateNestedManyWithoutUserInput
@@ -259,6 +298,9 @@ export type TelegramUserUncheckedCreateInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   facts?: Prisma.FactsUncheckedCreateNestedManyWithoutUserInput
   relation?: Prisma.RelationUncheckedCreateNestedManyWithoutUserInput
   messageHistory?: Prisma.MessageHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -268,6 +310,9 @@ export type TelegramUserUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   facts?: Prisma.FactsUpdateManyWithoutUserNestedInput
   relation?: Prisma.RelationUpdateManyWithoutUserNestedInput
   messageHistory?: Prisma.MessageHistoryUpdateManyWithoutUserNestedInput
@@ -277,6 +322,9 @@ export type TelegramUserUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   facts?: Prisma.FactsUncheckedUpdateManyWithoutUserNestedInput
   relation?: Prisma.RelationUncheckedUpdateManyWithoutUserNestedInput
   messageHistory?: Prisma.MessageHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -286,24 +334,36 @@ export type TelegramUserCreateManyInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
 }
 
 export type TelegramUserUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TelegramUserUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TelegramUserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   displayname?: Prisma.SortOrder
   relationShipStart?: Prisma.SortOrder
+  inException?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type TelegramUserAvgOrderByAggregateInput = {
@@ -314,12 +374,18 @@ export type TelegramUserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   displayname?: Prisma.SortOrder
   relationShipStart?: Prisma.SortOrder
+  inException?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type TelegramUserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   displayname?: Prisma.SortOrder
   relationShipStart?: Prisma.SortOrder
+  inException?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type TelegramUserSumOrderByAggregateInput = {
@@ -345,6 +411,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type TelegramUserCreateNestedOneWithoutFactsInput = {
@@ -393,6 +463,9 @@ export type TelegramUserCreateWithoutFactsInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   relation?: Prisma.RelationCreateNestedManyWithoutUserInput
   messageHistory?: Prisma.MessageHistoryCreateNestedManyWithoutUserInput
 }
@@ -401,6 +474,9 @@ export type TelegramUserUncheckedCreateWithoutFactsInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   relation?: Prisma.RelationUncheckedCreateNestedManyWithoutUserInput
   messageHistory?: Prisma.MessageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
@@ -425,6 +501,9 @@ export type TelegramUserUpdateWithoutFactsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relation?: Prisma.RelationUpdateManyWithoutUserNestedInput
   messageHistory?: Prisma.MessageHistoryUpdateManyWithoutUserNestedInput
 }
@@ -433,6 +512,9 @@ export type TelegramUserUncheckedUpdateWithoutFactsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relation?: Prisma.RelationUncheckedUpdateManyWithoutUserNestedInput
   messageHistory?: Prisma.MessageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -441,6 +523,9 @@ export type TelegramUserCreateWithoutRelationInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   facts?: Prisma.FactsCreateNestedManyWithoutUserInput
   messageHistory?: Prisma.MessageHistoryCreateNestedManyWithoutUserInput
 }
@@ -449,6 +534,9 @@ export type TelegramUserUncheckedCreateWithoutRelationInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   facts?: Prisma.FactsUncheckedCreateNestedManyWithoutUserInput
   messageHistory?: Prisma.MessageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
@@ -473,6 +561,9 @@ export type TelegramUserUpdateWithoutRelationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   facts?: Prisma.FactsUpdateManyWithoutUserNestedInput
   messageHistory?: Prisma.MessageHistoryUpdateManyWithoutUserNestedInput
 }
@@ -481,6 +572,9 @@ export type TelegramUserUncheckedUpdateWithoutRelationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   facts?: Prisma.FactsUncheckedUpdateManyWithoutUserNestedInput
   messageHistory?: Prisma.MessageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -489,6 +583,9 @@ export type TelegramUserCreateWithoutMessageHistoryInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   facts?: Prisma.FactsCreateNestedManyWithoutUserInput
   relation?: Prisma.RelationCreateNestedManyWithoutUserInput
 }
@@ -497,6 +594,9 @@ export type TelegramUserUncheckedCreateWithoutMessageHistoryInput = {
   id: bigint | number
   displayname: string
   relationShipStart: Date | string
+  inException: boolean
+  createdAt: Date | string
+  updatedAt: Date | string
   facts?: Prisma.FactsUncheckedCreateNestedManyWithoutUserInput
   relation?: Prisma.RelationUncheckedCreateNestedManyWithoutUserInput
 }
@@ -521,6 +621,9 @@ export type TelegramUserUpdateWithoutMessageHistoryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   facts?: Prisma.FactsUpdateManyWithoutUserNestedInput
   relation?: Prisma.RelationUpdateManyWithoutUserNestedInput
 }
@@ -529,6 +632,9 @@ export type TelegramUserUncheckedUpdateWithoutMessageHistoryInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   displayname?: Prisma.StringFieldUpdateOperationsInput | string
   relationShipStart?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inException?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   facts?: Prisma.FactsUncheckedUpdateManyWithoutUserNestedInput
   relation?: Prisma.RelationUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -586,6 +692,9 @@ export type TelegramUserSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   displayname?: boolean
   relationShipStart?: boolean
+  inException?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   facts?: boolean | Prisma.TelegramUser$factsArgs<ExtArgs>
   relation?: boolean | Prisma.TelegramUser$relationArgs<ExtArgs>
   messageHistory?: boolean | Prisma.TelegramUser$messageHistoryArgs<ExtArgs>
@@ -596,21 +705,30 @@ export type TelegramUserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   displayname?: boolean
   relationShipStart?: boolean
+  inException?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["telegramUser"]>
 
 export type TelegramUserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   displayname?: boolean
   relationShipStart?: boolean
+  inException?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["telegramUser"]>
 
 export type TelegramUserSelectScalar = {
   id?: boolean
   displayname?: boolean
   relationShipStart?: boolean
+  inException?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type TelegramUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayname" | "relationShipStart", ExtArgs["result"]["telegramUser"]>
+export type TelegramUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayname" | "relationShipStart" | "inException" | "createdAt" | "updatedAt", ExtArgs["result"]["telegramUser"]>
 export type TelegramUserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   facts?: boolean | Prisma.TelegramUser$factsArgs<ExtArgs>
   relation?: boolean | Prisma.TelegramUser$relationArgs<ExtArgs>
@@ -631,6 +749,9 @@ export type $TelegramUserPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: bigint
     displayname: string
     relationShipStart: Date
+    inException: boolean
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["telegramUser"]>
   composites: {}
 }
@@ -1060,6 +1181,9 @@ export interface TelegramUserFieldRefs {
   readonly id: Prisma.FieldRef<"TelegramUser", 'BigInt'>
   readonly displayname: Prisma.FieldRef<"TelegramUser", 'String'>
   readonly relationShipStart: Prisma.FieldRef<"TelegramUser", 'DateTime'>
+  readonly inException: Prisma.FieldRef<"TelegramUser", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"TelegramUser", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"TelegramUser", 'DateTime'>
 }
     
 

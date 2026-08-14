@@ -19,7 +19,7 @@ model TelegramUser {
   facts             Facts[]
   relation          Relation[]
   messageHistory    MessageHistory[]
-  inException Boolean
+  inException       Boolean
 
   createdAt DateTime
   updatedAt DateTime
@@ -60,6 +60,7 @@ model MessageHistory {
   isMyMessage    Boolean
   content        String
   media          Boolean      @default(false)
+  pathToMedia    String
 
   createdAt DateTime
   updatedAt DateTime
